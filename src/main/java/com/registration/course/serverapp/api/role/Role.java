@@ -14,7 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.registration.course.serverapp.api.privilege.Privilege;
+import com.registration.course.serverapp.api.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,4 +41,8 @@ public class Role {
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "tb_role_privilege", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "privilege_id"))
   private List<Privilege> privileges;
+
+  @ManyToMany(mappedBy = "roles")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  private List<User> users;
 }
