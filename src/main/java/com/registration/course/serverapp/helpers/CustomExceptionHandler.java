@@ -1,7 +1,7 @@
 package com.registration.course.serverapp.helpers;
 
-import java.util.NoSuchElementException;
-
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,15 +13,21 @@ import com.registration.course.serverapp.api.dto.response.ResponseData;
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ResponseData<String>> handleNoSuchElementException(NoSuchElementException ex) {
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<ResponseData<String>> handleEmptyResultDataAccessException(
+            EmptyResultDataAccessException ex) {
         ResponseData<String> responseData = new ResponseData<>();
         responseData.setStatus(false);
-        responseData.getMessages().add("Data tidak ditemukan");
+        responseData.getMessages().add(ex.getMessage() + " tidak ditemukan di database");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
     }
 
-    // Tambahkan penanganan exception lainnya jika diperlukan
-
-    // ...
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ResponseData<String>> handleDataIntegrityViolationException(
+            DataIntegrityViolationException ex) {
+        ResponseData<String> responseData = new ResponseData<>();
+        responseData.setStatus(false);
+        responseData.getMessages().add(ex.getMessage() + " sudah ada di database");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(responseData);
+    }
 }
