@@ -1,11 +1,15 @@
 package com.registration.course.serverapp.api.authentication;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.registration.course.serverapp.api.dto.request.UserRequest;
@@ -30,6 +34,9 @@ public class AuthService {
   @Autowired
   RoleService roleService;
 
+  @Autowired
+  PasswordEncoder passwordEncoder;
+
   public User register(UserRequest userRequest) {
     Member member = modelMapper.map(userRequest, Member.class);
     User user = modelMapper.map(userRequest, User.class);
@@ -46,8 +53,13 @@ public class AuthService {
     roles.add(roleService.getById(1));
     user.setRoles(roles);
 
+    // set timestamp
+    LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.systemDefault());
+    Timestamp timestamp = Timestamp.valueOf(currentDateTime);
+    user.setCreated_at(timestamp);
+
     // set password with encoded
-    // .....
+    user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
     return userRespository.save(user);
   }
