@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.registration.course.serverapp.api.dto.request.UserRequest;
 import com.registration.course.serverapp.api.member.Member;
+import com.registration.course.serverapp.api.member.MemberRespository;
 import com.registration.course.serverapp.api.role.Role;
 import com.registration.course.serverapp.api.role.RoleService;
 import com.registration.course.serverapp.api.user.User;
@@ -37,6 +38,9 @@ public class AuthService {
   @Autowired
   PasswordEncoder passwordEncoder;
 
+  @Autowired
+  MemberRespository memberRespository;
+
   public User register(UserRequest userRequest) {
     Member member = modelMapper.map(userRequest, Member.class);
     User user = modelMapper.map(userRequest, User.class);
@@ -46,6 +50,11 @@ public class AuthService {
 
     if (userRespository.existsByUsername(userRequest.getUsername())) {
       throw new DataIntegrityViolationException("username");
+    }
+
+    if (memberRespository.existsByEmail(userRequest.getEmail())) {
+      throw new DataIntegrityViolationException("email");
+
     }
 
     // set default role
