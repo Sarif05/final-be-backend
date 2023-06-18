@@ -60,6 +60,7 @@ public class privilegeController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
     responseData.setStatus(true);
+    responseData.getMessages().add("Privilege " + privilege.getName() + " berhasil di tambahkan");
     responseData.getPlayload().add(privilegeService.create(privilege));
     return ResponseEntity.ok(responseData);
   }

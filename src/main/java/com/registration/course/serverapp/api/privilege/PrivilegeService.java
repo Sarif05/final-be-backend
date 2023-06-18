@@ -1,9 +1,9 @@
 package com.registration.course.serverapp.api.privilege;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class PrivilegeService {
 
   public Privilege getById(Integer id) {
     return privilegeRepository.findById(id)
-        .orElseThrow(() -> new NoSuchElementException());
+        .orElseThrow(() -> new EmptyResultDataAccessException("data privilege tersebut", 0));
   }
 
   public Privilege delete(Integer id) {

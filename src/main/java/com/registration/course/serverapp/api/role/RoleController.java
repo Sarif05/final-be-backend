@@ -50,6 +50,7 @@ public class RoleController {
     }
     responseData.setStatus(true);
     responseData.getPlayload().add(roleService.create(role));
+    responseData.getMessages().add("Role " + role.getName() + " berhasil ditambahkan");
     return ResponseEntity.ok(responseData);
   }
 

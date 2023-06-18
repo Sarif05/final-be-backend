@@ -1,9 +1,9 @@
 package com.registration.course.serverapp.api.role;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class RoleService {
   }
 
   public Role getById(Integer id) {
-    return roleRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+    return roleRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("Data role tersebut", 0));
   }
 
   public Role update(Integer id, Role role) {
