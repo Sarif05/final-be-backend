@@ -3,6 +3,7 @@ package com.registration.course.serverapp.api.privilege;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ public class PrivilegeService {
   }
 
   public Privilege create(Privilege privilege) {
+    if (privilegeRepository.existsByName(privilege.getName())) {
+      throw new DataIntegrityViolationException("Privilege dengan nama " + privilege.getName());
+    }
     return privilegeRepository.save(privilege);
   }
 
@@ -35,6 +39,9 @@ public class PrivilegeService {
   }
 
   public Privilege update(Integer id, Privilege privilege) {
+    if (privilegeRepository.existsByName(privilege.getName())) {
+      throw new DataIntegrityViolationException("Privilege dengan nama " + privilege.getName());
+    }
     this.getById(id);
     privilege.setId(id);
     return privilegeRepository.save(privilege);
