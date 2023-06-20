@@ -45,8 +45,8 @@ public class User {
   @Column(name = "password", nullable = false)
   private String password;
 
-  private Boolean is_enabled = true;
-  private Boolean is_account_non_locked = true;
+  private boolean is_enabled = true;
+  private boolean is_account_non_locked = true;
 
   private Timestamp created_at;
 
