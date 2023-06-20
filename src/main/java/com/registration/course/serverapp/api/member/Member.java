@@ -1,16 +1,20 @@
 package com.registration.course.serverapp.api.member;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.registration.course.serverapp.api.transaction.Transaction;
 import com.registration.course.serverapp.api.user.User;
 
 import lombok.AllArgsConstructor;
@@ -44,4 +48,7 @@ public class Member {
   @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
   @PrimaryKeyJoinColumn
   private User user;
+
+  @OneToMany(mappedBy = "member")
+  List<Transaction> transactions;
 }

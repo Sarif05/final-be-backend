@@ -11,10 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.registration.course.serverapp.api.course.Course;
 import com.registration.course.serverapp.api.member.Member;
 import com.registration.course.serverapp.api.transaction.history.History;
@@ -35,13 +35,13 @@ public class Transaction {
   private Integer id;
 
   @ManyToOne
-  @MapsId("id")
-  @JoinColumn(name = "course_id", nullable = false)
+  @JoinColumn(name = "course_id")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private Course course;
 
   @ManyToOne
-  @MapsId("id")
-  @JoinColumn(name = "member_id", nullable = false)
+  @JoinColumn(name = "member_id")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private Member member;
 
   @Enumerated(EnumType.STRING)
@@ -52,6 +52,7 @@ public class Transaction {
   private Timestamp created_at;
 
   @OneToMany(mappedBy = "transaction")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private List<History> histories;
 
 }
