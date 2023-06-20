@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.registration.course.serverapp.api.course.Course;
 
 import lombok.AllArgsConstructor;
@@ -31,5 +32,6 @@ public class Category {
   private String name;
 
   @OneToMany(mappedBy = "category")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private List<Course> courses;
 }
