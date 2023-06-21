@@ -22,4 +22,9 @@ public class UserService {
   public User getUserbyId(Integer id) {
     return userRespository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("User", 0));
   }
+
+  public User getByUsername(String username) {
+    return userRespository.findByUsername(username).orElseThrow(() -> new EmptyResultDataAccessException("User", 0));
+  }
+
 }
