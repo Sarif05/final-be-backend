@@ -1,5 +1,9 @@
 # API Documentation
 
+## DB
+
+- name: `db_course`
+
 ## Endpoint
 
 `http:/localhost:9000/api`
@@ -121,11 +125,18 @@
 - URL: `/trasaction`
 - Request Body:
 
-```json
-{
-  "courseId": 2
-}
-```
+  ```json
+  {
+    "courseId": integer
+  }
+  ```
+
+### Get Trasaction by Member Id (Authorized)
+
+- Method: `GET`
+- URL: `/transaction/member/{id}`
+
+---
 
 ## ADMIN
 
@@ -138,7 +149,7 @@
 
   ```json
   {
-    "name": "frontend"
+    "name": string
   }
   ```
 
@@ -171,8 +182,8 @@
 - URL: `/transaction`
 - Request Body
 
-```json
-{
-  "statusUpdate": "success" // success, process, failed
-}
-```
+  ```json
+  {
+    "statusUpdate": "success" // success, process, failed
+  }
+  ```
