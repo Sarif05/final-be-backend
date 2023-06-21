@@ -16,16 +16,16 @@ public class MemberService {
   @Autowired
   MemberRespository memberRespository;
 
-  public List<Member> getAllMembers() {
+  public List<Member> getAll() {
     return memberRespository.findAll();
   }
 
-  public Member getMemberById(Integer id) {
+  public Member getById(Integer id) {
     return memberRespository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("member ", 0));
   }
 
-  public Member updateMember(Integer id, Member member) {
-    Member chekingMember = this.getMemberById(id);
+  public Member update(Integer id, Member member) {
+    Member chekingMember = this.getById(id);
     if (!chekingMember.getEmail().equalsIgnoreCase(member.getEmail())) {
       if (memberRespository.existsByEmail(member.getEmail())) {
         throw new DataIntegrityViolationException("Email");

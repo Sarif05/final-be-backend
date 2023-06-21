@@ -27,16 +27,16 @@ public class MemberController {
   MemberService memberService;
 
   @GetMapping
-  public ResponseEntity<ResponseData<Member>> getAll() {
+  public ResponseEntity<ResponseData<Member>> getAllMembers() {
     ResponseData<Member> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(memberService.getAllMembers());
+    responseData.setPlayload(memberService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<ResponseData<Member>> update(@Valid @RequestBody Member member, @PathVariable Integer id,
+  public ResponseEntity<ResponseData<Member>> updateMember(@Valid @RequestBody Member member, @PathVariable Integer id,
       Errors errors) {
     ResponseData<Member> responseData = new ResponseData<>();
     if (errors.hasErrors()) {
@@ -46,7 +46,7 @@ public class MemberController {
       responseData.setStatus(false);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
-    responseData.getPlayload().add(memberService.updateMember(id, member));
+    responseData.getPlayload().add(memberService.update(id, member));
     responseData.setStatus(true);
     responseData.getMessages().add("member berhasil diperbarui");
     return ResponseEntity.ok(responseData);
