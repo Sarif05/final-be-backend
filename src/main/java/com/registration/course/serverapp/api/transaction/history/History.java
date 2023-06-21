@@ -1,6 +1,7 @@
 package com.registration.course.serverapp.api.transaction.history;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.registration.course.serverapp.api.transaction.Transaction;
+import com.registration.course.serverapp.api.transaction.TransactionStatus;
 
 import lombok.AllArgsConstructor;
 
@@ -27,13 +29,15 @@ public class History {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  private Date date;
+  private Timestamp date;
 
   @Enumerated(EnumType.STRING)
-  private HistoryStatus status;
+  private TransactionStatus status;
+  // private HistoryStatus status;
 
   @ManyToOne
   @JoinColumn(name = "transaction_id", nullable = false)
+
   private Transaction transaction;
 
 }
