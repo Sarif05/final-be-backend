@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.registration.course.serverapp.api.course.Course;
 import com.registration.course.serverapp.api.course.CourseService;
 import com.registration.course.serverapp.api.dto.request.TransactionRequest;
+import com.registration.course.serverapp.api.dto.request.TransactionStatusAndIsRegisteredRequest;
 import com.registration.course.serverapp.api.member.Member;
 import com.registration.course.serverapp.api.member.MemberService;
 import com.registration.course.serverapp.api.transaction.history.HistoryService;
@@ -73,11 +74,23 @@ public class TransactionService {
     return transactionRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException("transaction ", 0));
   }
 
-  public Transaction update(Integer id, Transaction transaction) {
+  public Transaction update(Integer id,
+      TransactionStatusAndIsRegisteredRequest transactionStatusAndIsRegisteredRequest) {
     Transaction checkingTransaction = this.getById(id);
-    transaction.setId(id);
+
+    checkingTransaction.setId(id);
+
+    if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Success")) {
+      checkingTransaction.setStatus(TransactionStatus.SUCCESS);
+      checkingTransaction.setIs_registered(true);
+    } else if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("process")) {
+      checkingTransaction.setStatus(TransactionStatus.PROCESS);
+    } else if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Failed")) {
+      checkingTransaction.setStatus(TransactionStatus.FAILED);
+    }
+
     historyService.addHistory(checkingTransaction);
-    return transactionRepository.save(transaction);
+    return transactionRepository.save(checkingTransaction);
   }
 
 }

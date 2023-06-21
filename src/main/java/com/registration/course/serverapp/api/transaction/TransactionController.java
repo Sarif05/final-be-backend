@@ -2,16 +2,11 @@ package com.registration.course.serverapp.api.transaction;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.registration.course.serverapp.api.authentication.AppUserDetail;
 import com.registration.course.serverapp.api.dto.request.TransactionRequest;
+import com.registration.course.serverapp.api.dto.request.TransactionStatusAndIsRegisteredRequest;
 import com.registration.course.serverapp.api.dto.response.ResponseData;
 import com.registration.course.serverapp.api.user.User;
 import com.registration.course.serverapp.api.user.UserService;
@@ -87,20 +83,14 @@ public class TransactionController {
     return ResponseEntity.ok(responseData);
   }
 
-  // Admin dapat mengubah status
+  // Admin dapat mengubah status dan is_registered
   @PutMapping("/{id}")
-  public ResponseEntity<ResponseData<Transaction>> updateMember(@Valid @RequestBody Transaction transaction,
-      @PathVariable Integer id,
-      Errors errors) {
+  public ResponseEntity<ResponseData<Transaction>> updateMember(
+      @RequestBody TransactionStatusAndIsRegisteredRequest transactionStatusAndIsRegisteredRequest,
+      @PathVariable Integer id) {
     ResponseData<Transaction> responseData = new ResponseData<>();
-    if (errors.hasErrors()) {
-      for (ObjectError error : errors.getAllErrors()) {
-        responseData.getMessages().add(error.getDefaultMessage());
-      }
-      responseData.setStatus(false);
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-    }
-    responseData.getPlayload().add(transactionService.update(id, transaction));
+
+    responseData.getPlayload().add(transactionService.update(id, transactionStatusAndIsRegisteredRequest));
     responseData.setStatus(true);
     responseData.getMessages().add("transaction berhasil diperbarui");
     return ResponseEntity.ok(responseData);
