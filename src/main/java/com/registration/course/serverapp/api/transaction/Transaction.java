@@ -36,12 +36,12 @@ public class Transaction {
 
   @ManyToOne
   @JoinColumn(name = "course_id")
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  // @JsonProperty(access = JsonProperty.Access.READ_WRITE)
   private Course course;
 
   @ManyToOne
   @JoinColumn(name = "member_id")
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  // @JsonProperty(access = JsonProperty.Access.READ_WRITE)
   private Member member;
 
   @Enumerated(EnumType.STRING)

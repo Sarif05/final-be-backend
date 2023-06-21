@@ -14,6 +14,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.registration.course.serverapp.api.transaction.Transaction;
 import com.registration.course.serverapp.api.user.User;
 
@@ -50,5 +51,6 @@ public class Member {
   private User user;
 
   @OneToMany(mappedBy = "member")
+  @JsonIgnore
   List<Transaction> transactions;
 }

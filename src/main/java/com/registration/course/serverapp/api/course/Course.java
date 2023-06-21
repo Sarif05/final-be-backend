@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.registration.course.serverapp.api.course.category.Category;
 import com.registration.course.serverapp.api.transaction.Transaction;
 
@@ -60,5 +61,6 @@ public class Course {
   private Category category;
 
   @OneToMany(mappedBy = "course")
+  @JsonIgnore
   List<Transaction> transactions;
 }
