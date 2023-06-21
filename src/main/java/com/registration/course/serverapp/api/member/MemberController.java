@@ -35,6 +35,15 @@ public class MemberController {
     return ResponseEntity.ok(responseData);
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<ResponseData<Member>> getUserById(@PathVariable Integer id) {
+    ResponseData<Member> responseData = new ResponseData<>();
+    responseData.setStatus(true);
+    responseData.getMessages().add("berhasil ditemukan");
+    responseData.getPlayload().add(memberService.getById(id));
+    return ResponseEntity.ok(responseData);
+  }
+
   @PutMapping("/{id}")
   public ResponseEntity<ResponseData<Member>> updateMember(@Valid @RequestBody Member member, @PathVariable Integer id,
       Errors errors) {

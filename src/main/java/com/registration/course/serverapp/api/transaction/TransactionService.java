@@ -93,4 +93,8 @@ public class TransactionService {
     return transactionRepository.save(checkingTransaction);
   }
 
+  public List<Transaction> getAllTransactionsByMemberId(Integer memberId) {
+    return transactionRepository.findAllByMemberId(memberId);
+  }
+
 }

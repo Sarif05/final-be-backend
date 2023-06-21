@@ -45,6 +45,15 @@ public class TransactionController {
     return ResponseEntity.ok(responseData);
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<ResponseData<Transaction>> getTransactionById(@PathVariable Integer id) {
+    ResponseData<Transaction> responseData = new ResponseData<>();
+    responseData.setStatus(true);
+    responseData.getMessages().add("berhasil ditemukan");
+    responseData.getPlayload().add(transactionService.getById(id));
+    return ResponseEntity.ok(responseData);
+  }
+
   // User menambahkan course
   @PostMapping
   public ResponseEntity<ResponseData<Transaction>> addTransaction(@RequestBody TransactionRequest transactionRequest) {
@@ -93,6 +102,15 @@ public class TransactionController {
     responseData.getPlayload().add(transactionService.update(id, transactionStatusAndIsRegisteredRequest));
     responseData.setStatus(true);
     responseData.getMessages().add("transaction berhasil diperbarui");
+    return ResponseEntity.ok(responseData);
+  }
+
+  @GetMapping("/member/{id}")
+  public ResponseEntity<ResponseData<Transaction>> getAllTransactionByMemberId(@PathVariable Integer id) {
+    ResponseData<Transaction> responseData = new ResponseData<>();
+    responseData.setStatus(true);
+    responseData.getMessages().add("berhasil ditemukan");
+    responseData.setPlayload(transactionService.getAllTransactionsByMemberId(id));
     return ResponseEntity.ok(responseData);
   }
 
