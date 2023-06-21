@@ -136,6 +136,11 @@
 - Method: `GET`
 - URL: `/transaction/member/{id}`
 
+### GET History by Member Id (Authorized)
+
+- Method: `GET`
+- URL `/history/member/{id}`
+
 ---
 
 ## ADMIN
@@ -187,3 +192,8 @@
     "statusUpdate": "success" // success, process, failed
   }
   ```
+
+### GetAll History
+
+- Method: `GET`
+- URL: `/history`
