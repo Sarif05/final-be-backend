@@ -184,7 +184,7 @@
 ### Update Status Transaction
 
 - Method: `PUT`
-- URL: `/transaction`
+- URL: `/transaction/{id}`
 - Request Body
 
   ```json
