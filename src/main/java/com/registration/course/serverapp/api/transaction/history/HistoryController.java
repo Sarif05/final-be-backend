@@ -24,7 +24,7 @@ public class HistoryController {
     ResponseData<History> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(historyService.getAll());
+    responseData.setPayload(historyService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -33,7 +33,7 @@ public class HistoryController {
     ResponseData<History> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
-    responseData.setPlayload(historyService.getAllHistoriesByMemberId(id));
+    responseData.setPayload(historyService.getAllHistoriesByMemberId(id));
     return ResponseEntity.ok(responseData);
   }
 

@@ -31,7 +31,7 @@ public class MemberController {
     ResponseData<Member> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(memberService.getAll());
+    responseData.setPayload(memberService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -40,7 +40,7 @@ public class MemberController {
     ResponseData<Member> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
-    responseData.getPlayload().add(memberService.getById(id));
+    responseData.getPayload().add(memberService.getById(id));
     return ResponseEntity.ok(responseData);
   }
 
@@ -55,7 +55,7 @@ public class MemberController {
       responseData.setStatus(false);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
-    responseData.getPlayload().add(memberService.update(id, member));
+    responseData.getPayload().add(memberService.update(id, member));
     responseData.setStatus(true);
     responseData.getMessages().add("member berhasil diperbarui");
     return ResponseEntity.ok(responseData);

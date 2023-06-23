@@ -33,7 +33,7 @@ public class privilegeController {
     ResponseData<Privilege> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(privilegeService.getAll());
+    responseData.setPayload(privilegeService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -42,7 +42,7 @@ public class privilegeController {
     ResponseData<Privilege> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.getPlayload().add(privilegeService.getById(id));
+    responseData.getPayload().add(privilegeService.getById(id));
 
     return ResponseEntity.ok(responseData);
   }
@@ -61,7 +61,7 @@ public class privilegeController {
     }
     responseData.setStatus(true);
     responseData.getMessages().add("Privilege " + privilege.getName() + " berhasil di tambahkan");
-    responseData.getPlayload().add(privilegeService.create(privilege));
+    responseData.getPayload().add(privilegeService.create(privilege));
     return ResponseEntity.ok(responseData);
   }
 
@@ -80,7 +80,7 @@ public class privilegeController {
     }
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil diedit");
-    responseData.getPlayload().add(privilegeService.update(id, privilege));
+    responseData.getPayload().add(privilegeService.update(id, privilege));
     return ResponseEntity.ok(responseData);
 
   }
@@ -91,7 +91,7 @@ public class privilegeController {
 
     responseData.setStatus(true);
     responseData.getMessages().add("data berhasil dihapus");
-    responseData.getPlayload().add(privilegeService.delete(id));
+    responseData.getPayload().add(privilegeService.delete(id));
 
     return ResponseEntity.ok(responseData);
 

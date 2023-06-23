@@ -34,7 +34,7 @@ public class RoleController {
     ResponseData<Role> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(roleService.getAll());
+    responseData.setPayload(roleService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -49,7 +49,7 @@ public class RoleController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
     responseData.setStatus(true);
-    responseData.getPlayload().add(roleService.create(role));
+    responseData.getPayload().add(roleService.create(role));
     responseData.getMessages().add("Role " + role.getName() + " berhasil ditambahkan");
     return ResponseEntity.ok(responseData);
   }
@@ -66,7 +66,7 @@ public class RoleController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
     responseData.setStatus(true);
-    responseData.getPlayload().add(roleService.update(id, role));
+    responseData.getPayload().add(roleService.update(id, role));
     return ResponseEntity.ok(responseData);
   }
 
@@ -76,7 +76,7 @@ public class RoleController {
 
     responseData.setStatus(true);
     responseData.getMessages().add("data berhasil dihapus");
-    responseData.getPlayload().add(roleService.delete(id));
+    responseData.getPayload().add(roleService.delete(id));
     return ResponseEntity.ok(responseData);
   }
 }

@@ -42,7 +42,7 @@ public class AuthController {
 
     responseData.setStatus(true);
     responseData.getMessages().add("Akun berhasil didaftarkan");
-    responseData.getPlayload().add(authService.register(userRequest));
+    responseData.getPayload().add(authService.register(userRequest));
     return ResponseEntity.ok(responseData);
   }
 
@@ -61,7 +61,7 @@ public class AuthController {
 
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil login");
-    responseData.getPlayload().add(authService.login(loginRequest));
+    responseData.getPayload().add(authService.login(loginRequest));
     return ResponseEntity.ok(responseData);
   }
 }

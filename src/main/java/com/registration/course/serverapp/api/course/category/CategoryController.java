@@ -33,7 +33,7 @@ public class CategoryController {
     ResponseData<Category> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(categoryService.getAll());
+    responseData.setPayload(categoryService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -49,7 +49,7 @@ public class CategoryController {
     }
     responseData.setStatus(true);
     responseData.getMessages().add("Category berhasil di tambahkan");
-    responseData.getPlayload().add(categoryService.create(category));
+    responseData.getPayload().add(categoryService.create(category));
     return ResponseEntity.ok(responseData);
   }
 
@@ -65,7 +65,7 @@ public class CategoryController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
     responseData.setStatus(true);
-    responseData.getPlayload().add(categoryService.update(id, category));
+    responseData.getPayload().add(categoryService.update(id, category));
     return ResponseEntity.ok(responseData);
   }
 
@@ -75,7 +75,7 @@ public class CategoryController {
 
     responseData.setStatus(true);
     responseData.getMessages().add("Category berhasil dihapus");
-    responseData.getPlayload().add(categoryService.delete(id));
+    responseData.getPayload().add(categoryService.delete(id));
     return ResponseEntity.ok(responseData);
   }
 }

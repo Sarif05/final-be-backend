@@ -23,7 +23,7 @@ public class UserController {
     ResponseData<User> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(userService.getAll());
+    responseData.setPayload(userService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -32,7 +32,7 @@ public class UserController {
     ResponseData<User> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
-    responseData.getPlayload().add(userService.getUserbyId(id));
+    responseData.getPayload().add(userService.getUserbyId(id));
     return ResponseEntity.ok(responseData);
   }
 

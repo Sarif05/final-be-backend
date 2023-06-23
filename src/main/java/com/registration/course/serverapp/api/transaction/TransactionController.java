@@ -41,7 +41,7 @@ public class TransactionController {
     ResponseData<Transaction> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(transactionService.getAll());
+    responseData.setPayload(transactionService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -50,7 +50,7 @@ public class TransactionController {
     ResponseData<Transaction> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
-    responseData.getPlayload().add(transactionService.getById(id));
+    responseData.getPayload().add(transactionService.getById(id));
     return ResponseEntity.ok(responseData);
   }
 
@@ -88,7 +88,7 @@ public class TransactionController {
 
     responseData.setStatus(true);
     responseData.getMessages().add("course berhasil ditambahkan ke transaction");
-    responseData.getPlayload().add(transactionService.create(transactionRequest));
+    responseData.getPayload().add(transactionService.create(transactionRequest));
     return ResponseEntity.ok(responseData);
   }
 
@@ -99,7 +99,7 @@ public class TransactionController {
       @PathVariable Integer id) {
     ResponseData<Transaction> responseData = new ResponseData<>();
 
-    responseData.getPlayload().add(transactionService.update(id, transactionStatusAndIsRegisteredRequest));
+    responseData.getPayload().add(transactionService.update(id, transactionStatusAndIsRegisteredRequest));
     responseData.setStatus(true);
     responseData.getMessages().add("transaction berhasil diperbarui");
     return ResponseEntity.ok(responseData);
@@ -110,7 +110,7 @@ public class TransactionController {
     ResponseData<Transaction> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
-    responseData.setPlayload(transactionService.getAllTransactionsByMemberId(id));
+    responseData.setPayload(transactionService.getAllTransactionsByMemberId(id));
     return ResponseEntity.ok(responseData);
   }
 

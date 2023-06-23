@@ -34,7 +34,7 @@ public class CourseController {
     ResponseData<Course> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("success");
-    responseData.setPlayload(courseService.getAll());
+    responseData.setPayload(courseService.getAll());
     return ResponseEntity.ok(responseData);
   }
 
@@ -43,7 +43,7 @@ public class CourseController {
     ResponseData<Course> responseData = new ResponseData<>();
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
-    responseData.getPlayload().add(courseService.getById(id));
+    responseData.getPayload().add(courseService.getById(id));
     return ResponseEntity.ok(responseData);
   }
 
@@ -58,7 +58,7 @@ public class CourseController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
     responseData.setStatus(true);
-    responseData.getPlayload().add(courseService.create(course));
+    responseData.getPayload().add(courseService.create(course));
     responseData.getMessages().add("Course " + course.getTitle() + " berhasil ditambahkan");
     return ResponseEntity.ok(responseData);
   }
@@ -76,7 +76,7 @@ public class CourseController {
     }
     responseData.setStatus(true);
     responseData.getMessages().add("data course berhasil diedit");
-    responseData.getPlayload().add(courseService.update(id, course));
+    responseData.getPayload().add(courseService.update(id, course));
     return ResponseEntity.ok(responseData);
   }
 
@@ -86,7 +86,7 @@ public class CourseController {
 
     responseData.setStatus(true);
     responseData.getMessages().add("data berhasil dihapus");
-    responseData.getPlayload().add(courseService.delete(id));
+    responseData.getPayload().add(courseService.delete(id));
     return ResponseEntity.ok(responseData);
   }
 
