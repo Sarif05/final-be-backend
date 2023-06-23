@@ -143,9 +143,9 @@
 
 ---
 
-## ADMIN
+## ADMIN (Authorized)
 
-### CRUD Category
+<!-- ### CRUD Category
 
 - Method Available: `GET, POST, PUT, DELETE`
 - URL `GET, POST`: `/course/category`
@@ -156,7 +156,7 @@
   {
     "name": string
   }
-  ```
+  ``` -->
 
 ### CRUD course
 
@@ -180,6 +180,11 @@
    }
   }
   ```
+
+## Get All Transaction
+
+- Method: `GET`
+- URL: `/transaction`
 
 ### Update Status Transaction
 
