@@ -36,4 +36,13 @@ public class UserController {
     return ResponseEntity.ok(responseData);
   }
 
+  @GetMapping("username/{name}")
+  public ResponseEntity<ResponseData<User>> getUserByName(@PathVariable String name) {
+    ResponseData<User> responseData = new ResponseData<>();
+    responseData.setStatus(true);
+    responseData.getMessages().add("berhasil ditemukan");
+    responseData.getPayload().add(userService.getByUsername(name));
+    return ResponseEntity.ok(responseData);
+  }
+
 }

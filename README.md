@@ -141,6 +141,11 @@
 - Method: `GET`
 - URL `/history/member/{id}`
 
+### GET User/Member by username (Autorized)
+
+- Method: `GET`
+- URL `/user/username/{name}`
+
 ---
 
 ## ADMIN (Authorized)
