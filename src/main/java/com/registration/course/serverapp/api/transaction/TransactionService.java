@@ -19,9 +19,11 @@ import com.registration.course.serverapp.api.member.MemberService;
 import com.registration.course.serverapp.api.transaction.history.HistoryService;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
 public class TransactionService {
 
   @Autowired
@@ -82,7 +84,7 @@ public class TransactionService {
 
     if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Success")) {
       checkingTransaction.setStatus(TransactionStatus.SUCCESS);
-      checkingTransaction.setIs_registered(true);
+      checkingTransaction.setIsRegistered(true);
     } else if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("process")) {
       checkingTransaction.setStatus(TransactionStatus.PROCESS);
     } else if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Failed")) {
@@ -95,6 +97,10 @@ public class TransactionService {
 
   public List<Transaction> getAllTransactionsByMemberId(Integer memberId) {
     return transactionRepository.findAllByMemberId(memberId);
+  }
+
+  public List<Transaction> getAllTransactionsByMemberIdSessionAndIsRegistered(Integer id) {
+    return transactionRepository.findAllByMemberIdAndIsRegistered(id, true);
   }
 
 }

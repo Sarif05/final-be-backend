@@ -23,9 +23,11 @@ import com.registration.course.serverapp.api.user.User;
 import com.registration.course.serverapp.api.user.UserService;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @RestController
 @AllArgsConstructor
+@NoArgsConstructor
 @RequestMapping("/api/transaction")
 public class TransactionController {
 
@@ -111,6 +113,29 @@ public class TransactionController {
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
     responseData.setPayload(transactionService.getAllTransactionsByMemberId(id));
+    return ResponseEntity.ok(responseData);
+  }
+
+  // ambil all course yang sudah terdaftar
+  @GetMapping("/course-registered")
+  public ResponseEntity<ResponseData<Transaction>> getAllTransactionByMemberIdSessionAndisRegistered() {
+    ResponseData<Transaction> responseData = new ResponseData<>();
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication != null) {
+      Object principal = authentication.getPrincipal();
+
+      if (principal instanceof AppUserDetail) {
+        AppUserDetail appUserDetail = (AppUserDetail) principal;
+        String username = appUserDetail.getUsername();
+        // Melakukan pemrosesan lebih lanjut dengan informasi pengguna
+        User user = userService.getByUsername(username);
+        responseData.setPayload(transactionService.getAllTransactionsByMemberIdSessionAndIsRegistered(user.getId()));
+      }
+    }
+    responseData.setStatus(true);
+    responseData.getMessages().add("data berhasil di dapatkan");
     return ResponseEntity.ok(responseData);
   }
 

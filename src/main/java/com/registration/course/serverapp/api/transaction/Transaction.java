@@ -3,6 +3,7 @@ package com.registration.course.serverapp.api.transaction;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -47,7 +48,8 @@ public class Transaction {
   @Enumerated(EnumType.STRING)
   private TransactionStatus status;
 
-  private Boolean is_registered = false;
+  @Column(name = "is_registered")
+  private Boolean isRegistered = false;
 
   private Timestamp created_at;
 
