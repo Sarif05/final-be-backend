@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.registration.course.serverapp.api.authentication.AppUserDetail;
+import com.registration.course.serverapp.api.dto.request.EmailRequest;
 import com.registration.course.serverapp.api.dto.request.TransactionRequest;
 import com.registration.course.serverapp.api.dto.request.TransactionStatusAndIsRegisteredRequest;
 import com.registration.course.serverapp.api.dto.response.ResponseData;
+import com.registration.course.serverapp.api.email.EmailSenderService;
 import com.registration.course.serverapp.api.user.User;
 import com.registration.course.serverapp.api.user.UserService;
 
@@ -36,6 +38,9 @@ public class TransactionController {
 
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private EmailSenderService emailSenderService;
 
   // admin
   @GetMapping
@@ -100,10 +105,24 @@ public class TransactionController {
       @RequestBody TransactionStatusAndIsRegisteredRequest transactionStatusAndIsRegisteredRequest,
       @PathVariable Integer id) {
     ResponseData<Transaction> responseData = new ResponseData<>();
+    EmailRequest emailRequest = new EmailRequest();
 
     responseData.getPayload().add(transactionService.update(id, transactionStatusAndIsRegisteredRequest));
     responseData.setStatus(true);
     responseData.getMessages().add("transaction berhasil diperbarui");
+
+    if (responseData.getPayload().get(0).getIsRegistered()) {
+      // send email
+      emailRequest.setSubject("RUANG KELAS");
+      emailRequest.setTo(responseData.getPayload().get(0).getMember().getEmail());
+      emailSenderService.sendEmailTemplate(emailRequest, true);
+    } else {
+      emailRequest.setSubject("RUANG KELAS");
+      emailRequest.setTo(responseData.getPayload().get(0).getMember().getEmail());
+      emailSenderService.sendEmailTemplate(emailRequest, false);
+
+    }
+
     return ResponseEntity.ok(responseData);
   }
 
