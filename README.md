@@ -136,34 +136,26 @@
 - Method: `GET`
 - URL: `/transaction/member/{id}`
 
-### GET History by Member Id (Authorized)
+### Get History by Member Id (Authorized)
 
 - Method: `GET`
 - URL `/history/member/{id}`
 
-### GET User/Member by username (Autorized)
+### Get User/Member by username (Autorized)
 
 - Method: `GET`
 - URL `/user/username/{name}`
+
+### Get All (course) transaction by member Id session where is_registered is true
+
+- Method: `GET`
+- URL: `/transaction/course-registered`
 
 ---
 
 ## ADMIN (Authorized)
 
-<!-- ### CRUD Category
-
-- Method Available: `GET, POST, PUT, DELETE`
-- URL `GET, POST`: `/course/category`
-- URL `PUT, DELETE`: `/course/category/{id}`
-- Request Body `POST`:
-
-  ```json
-  {
-    "name": string
-  }
-  ``` -->
-
-### CRUD course
+### CRUD course (Authorized)
 
 - Method Available: `GET, POST, PUT, DELETE`
 - URL `GET, POST`: `/course`
@@ -186,12 +178,12 @@
   }
   ```
 
-## Get All Transaction
+## Get All Transaction (Authorized)
 
 - Method: `GET`
 - URL: `/transaction`
 
-### Update Status Transaction
+### Update Status Transaction (Authorized)
 
 - Method: `PUT`
 - URL: `/transaction/{id}`
@@ -203,7 +195,14 @@
   }
   ```
 
-### GetAll History
+### Get All History (Authorized)
 
 - Method: `GET`
 - URL: `/history`
+
+### Get All Members (Authorized)
+
+- Method: `GET`
+- URL:`/member`
+
+### JMS auto sender when update status Transaction by member email
