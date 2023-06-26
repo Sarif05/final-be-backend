@@ -67,9 +67,11 @@ public class TransactionService {
     // set status default -> enum SUCCESS, PROCESS, FAIL
     transaction.setStatus(TransactionStatus.PROCESS);
 
-    // historyService.addHistory(transaction);
+    Transaction transaction2 = transactionRepository.save(transaction);
 
-    return transactionRepository.save(transaction);
+    historyService.addHistory(transaction2);
+
+    return transaction2;
   }
 
   public Transaction getById(Integer id) {
@@ -85,6 +87,10 @@ public class TransactionService {
     if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Success")) {
       checkingTransaction.setStatus(TransactionStatus.SUCCESS);
       checkingTransaction.setIsRegistered(true);
+
+      // tambahkan count
+      memberService.updateCourseActiveById(checkingTransaction.getMember().getId());
+
     } else if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("process")) {
       checkingTransaction.setStatus(TransactionStatus.PROCESS);
     } else if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Failed")) {

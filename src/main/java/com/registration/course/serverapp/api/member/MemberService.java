@@ -34,4 +34,13 @@ public class MemberService {
     member.setId(id);
     return memberRespository.save(member);
   }
+
+  public Member updateCourseActiveById(Integer Id) {
+    Member member = this.getById(Id);
+    member.setId(Id);
+    Integer currentActiveCourse = member.getActiveCourse();
+    member.setActiveCourse(currentActiveCourse + 1);
+    return memberRespository.save(member);
+  }
+
 }

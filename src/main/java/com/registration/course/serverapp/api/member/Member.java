@@ -45,6 +45,7 @@ public class Member {
   private Long phone;
   private String city;
   private String nationaly;
+  private Integer activeCourse = 0;
 
   @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
   @PrimaryKeyJoinColumn
