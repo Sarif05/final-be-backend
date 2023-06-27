@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.registration.course.serverapp.api.course.Course;
 import com.registration.course.serverapp.api.course.CourseService;
+import com.registration.course.serverapp.api.dto.request.EmailRequest;
 import com.registration.course.serverapp.api.dto.request.TransactionRequest;
 import com.registration.course.serverapp.api.dto.request.TransactionStatusAndIsRegisteredRequest;
+import com.registration.course.serverapp.api.email.EmailSenderService;
 import com.registration.course.serverapp.api.member.Member;
 import com.registration.course.serverapp.api.member.MemberService;
 import com.registration.course.serverapp.api.transaction.history.HistoryService;
@@ -40,6 +42,9 @@ public class TransactionService {
 
   @Autowired
   private HistoryService historyService;
+
+  @Autowired
+  private EmailSenderService emailSenderService;
 
   public List<Transaction> getAll() {
     return transactionRepository.findAll();
@@ -81,12 +86,18 @@ public class TransactionService {
   public Transaction update(Integer id,
       TransactionStatusAndIsRegisteredRequest transactionStatusAndIsRegisteredRequest) {
     Transaction checkingTransaction = this.getById(id);
+    EmailRequest emailRequest = new EmailRequest();
 
     checkingTransaction.setId(id);
 
     if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Success")) {
       checkingTransaction.setStatus(TransactionStatus.SUCCESS);
       checkingTransaction.setIsRegistered(true);
+
+      // send email lulus
+      emailRequest.setSubject("RUANG KELAS");
+      emailRequest.setTo(checkingTransaction.getMember().getEmail());
+      emailSenderService.sendEmailTemplate(emailRequest, true);
 
       // tambahkan count
       memberService.updateCourseActiveById(checkingTransaction.getMember().getId());
@@ -95,6 +106,11 @@ public class TransactionService {
       checkingTransaction.setStatus(TransactionStatus.PROCESS);
     } else if (transactionStatusAndIsRegisteredRequest.getStatusUpdate().equalsIgnoreCase("Failed")) {
       checkingTransaction.setStatus(TransactionStatus.FAILED);
+
+      // send email gagal
+      emailRequest.setSubject("RUANG KELAS");
+      emailRequest.setTo(checkingTransaction.getMember().getEmail());
+      emailSenderService.sendEmailTemplate(emailRequest, false);
     }
 
     historyService.addHistory(checkingTransaction);
