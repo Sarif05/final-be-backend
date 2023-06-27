@@ -44,6 +44,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers(HttpMethod.POST, "/api/role")
         .permitAll()
+        .antMatchers("/api/course", "/api/course/**")
+        .permitAll()
         .anyRequest()
         .authenticated()
         // .permitAll()
