@@ -136,15 +136,15 @@
 - Method: `GET`
 - URL: `/transaction/member/{id}`
 
-### Get History by Member Id (Authorized)
+### Get All History by Member Id session (Authorized)
 
 - Method: `GET`
-- URL `/history/member/{id}`
+- URL `/history/member`
 
-### Get User/Member by username (Autorized)
+<!-- ### Get User/Member by username (Autorized)
 
 - Method: `GET`
-- URL `/user/username/{name}`
+- URL `/user/username/{name}` -->
 
 ### Get All (course) transaction by member Id session where is_registered is true
 
