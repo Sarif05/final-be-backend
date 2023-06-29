@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.registration.course.serverapp.api.transaction.Transaction;
@@ -37,7 +38,8 @@ public class HistoryService {
   }
 
   public List<History> getAllHistoriesByMemberId(Integer memberId) {
-    return historyRepository.findAllByTransactionMemberId(memberId);
+    Sort sort = Sort.by(Sort.Direction.DESC, "date");
+    return historyRepository.findAllByTransactionMemberId(memberId, sort);
   }
 
 }

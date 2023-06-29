@@ -51,7 +51,8 @@ public class Transaction {
   @Column(name = "is_registered")
   private Boolean isRegistered = false;
 
-  private Timestamp created_at;
+  @Column(name = "created_at")
+  private Timestamp createdAt;
 
   @OneToMany(mappedBy = "transaction")
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

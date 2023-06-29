@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +17,8 @@ public class UserService {
   UserRespository userRespository;
 
   public List<User> getAll() {
-    return userRespository.findAll();
+    Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+    return userRespository.findAll(sort);
   }
 
   public User getUserbyId(Integer id) {

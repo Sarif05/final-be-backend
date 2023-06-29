@@ -56,7 +56,7 @@ public class Course {
   private Date start;
   private Date end;
   private Boolean is_enabled = true;
-  private Timestamp created_at;
+  private Timestamp createdAt;
 
   @ManyToOne
   @JoinColumn(name = "category_id")

@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import com.registration.course.serverapp.api.course.Course;
 import com.registration.course.serverapp.api.course.CourseService;
@@ -47,8 +48,8 @@ public class TransactionService {
   private EmailSenderService emailSenderService;
 
   public List<Transaction> getAll() {
-    return transactionRepository.findAll();
-
+    Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+    return transactionRepository.findAll(sort);
   }
 
   public Transaction create(TransactionRequest transactionRequest) {
@@ -67,7 +68,7 @@ public class TransactionService {
     // set created_at -> timestamp
     LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.systemDefault());
     Timestamp timestamp = Timestamp.valueOf(currentDateTime);
-    transaction.setCreated_at(timestamp);
+    transaction.setCreatedAt(timestamp);
 
     // set status default -> enum SUCCESS, PROCESS, FAIL
     transaction.setStatus(TransactionStatus.PROCESS);
@@ -118,7 +119,8 @@ public class TransactionService {
   }
 
   public List<Transaction> getAllTransactionsByMemberId(Integer memberId) {
-    return transactionRepository.findAllByMemberId(memberId);
+    Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+    return transactionRepository.findAllByMemberId(memberId, sort);
   }
 
   public List<Transaction> getAllTransactionsByMemberIdSessionAndIsRegistered(Integer id) {

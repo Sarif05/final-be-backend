@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.registration.course.serverapp.api.authentication.AppUserDetail;
-import com.registration.course.serverapp.api.dto.request.EmailRequest;
 import com.registration.course.serverapp.api.dto.request.TransactionRequest;
 import com.registration.course.serverapp.api.dto.request.TransactionStatusAndIsRegisteredRequest;
 import com.registration.course.serverapp.api.dto.response.ResponseData;
-import com.registration.course.serverapp.api.email.EmailSenderService;
 import com.registration.course.serverapp.api.user.User;
 import com.registration.course.serverapp.api.user.UserService;
 

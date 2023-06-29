@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +18,8 @@ public class MemberService {
   MemberRespository memberRespository;
 
   public List<Member> getAll() {
-    return memberRespository.findAll();
+    Sort sort = Sort.by(Sort.Direction.DESC, "user.createdAt");
+    return memberRespository.findAll(sort);
   }
 
   public Member getById(Integer id) {

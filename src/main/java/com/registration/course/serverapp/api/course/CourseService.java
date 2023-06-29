@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -19,14 +20,15 @@ public class CourseService {
   private CourseRepository courseRepository;
 
   public List<Course> getAll() {
-    return courseRepository.findAll();
+    Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+    return courseRepository.findAll(sort);
   }
 
   public Course create(Course course) {
 
     LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.systemDefault());
     Timestamp timestamp = Timestamp.valueOf(currentDateTime);
-    course.setCreated_at(timestamp);
+    course.setCreatedAt(timestamp);
 
     return courseRepository.save(course);
   }

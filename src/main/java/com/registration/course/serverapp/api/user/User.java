@@ -48,7 +48,8 @@ public class User {
   private boolean is_enabled = true;
   private boolean is_account_non_locked = true;
 
-  private Timestamp created_at;
+  @Column(name = "created_at")
+  private Timestamp createdAt;
 
   @OneToOne
   @MapsId

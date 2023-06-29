@@ -79,7 +79,7 @@ public class AuthService {
     // set timestamp
     LocalDateTime currentDateTime = LocalDateTime.now(ZoneId.systemDefault());
     Timestamp timestamp = Timestamp.valueOf(currentDateTime);
-    user.setCreated_at(timestamp);
+    user.setCreatedAt(timestamp);
 
     // set password with encoded
     user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
