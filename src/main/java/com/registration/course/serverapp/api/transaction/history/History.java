@@ -2,7 +2,6 @@ package com.registration.course.serverapp.api.transaction.history;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

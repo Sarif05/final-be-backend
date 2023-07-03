@@ -107,12 +107,25 @@ public class TransactionController {
     return ResponseEntity.ok(responseData);
   }
 
-  @GetMapping("/member/{id}")
-  public ResponseEntity<ResponseData<Transaction>> getAllTransactionByMemberId(@PathVariable Integer id) {
+  @GetMapping("/member-transactions")
+  public ResponseEntity<ResponseData<Transaction>> getAllTransactionByMemberIdSessioj() {
     ResponseData<Transaction> responseData = new ResponseData<>();
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication != null) {
+      Object principal = authentication.getPrincipal();
+
+      if (principal instanceof AppUserDetail) {
+        AppUserDetail appUserDetail = (AppUserDetail) principal;
+        String username = appUserDetail.getUsername();
+        User user = userService.getByUsername(username);
+        responseData.setPayload(transactionService.getAllTransactionsByMemberId(user.getId()));
+      }
+    }
+
     responseData.setStatus(true);
     responseData.getMessages().add("berhasil ditemukan");
-    responseData.setPayload(transactionService.getAllTransactionsByMemberId(id));
     return ResponseEntity.ok(responseData);
   }
 

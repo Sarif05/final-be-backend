@@ -131,10 +131,10 @@
   }
   ```
 
-### Get Trasaction by Member Id (Authorized)
+### Get Trasaction by Member Id session (Authorized)
 
 - Method: `GET`
-- URL: `/transaction/member/{id}`
+- URL: `/transaction/member-transactions`
 
 ### Get All History by Member Id session (Authorized)
 
