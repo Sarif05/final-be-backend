@@ -141,11 +141,6 @@
 - Method: `GET`
 - URL `/history/member`
 
-<!-- ### Get User/Member by username (Autorized)
-
-- Method: `GET`
-- URL `/user/username/{name}` -->
-
 ### Get All (course) transaction by member Id session where is_registered is true
 
 - Method: `GET`
@@ -153,7 +148,7 @@
 
 ---
 
-## ADMIN (Authorized)
+## ADMIN
 
 ### CRUD course (Authorized)
 
@@ -205,4 +200,18 @@
 - Method: `GET`
 - URL:`/member`
 
-### JMS auto sender when update status Transaction by member email
+### JMS auto sender when admin (Authorized) updates status Transaction by member email
+
+---
+
+## No Authorized
+
+### Get All Available Courses
+
+- Method: `GET`
+- URL: `/course`
+
+### Get Course by id
+
+- Method: `GET`
+- URL: `/course/{id}`
