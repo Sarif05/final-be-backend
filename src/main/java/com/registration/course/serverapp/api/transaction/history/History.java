@@ -33,7 +33,6 @@ public class History {
 
   @Enumerated(EnumType.STRING)
   private TransactionStatus status;
-  // private HistoryStatus status;
 
   @ManyToOne
   @JoinColumn(name = "transaction_id", nullable = false)

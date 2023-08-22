@@ -53,11 +53,6 @@ public class TransactionService {
   }
 
   public Transaction create(TransactionRequest transactionRequest) {
-    // Transaction transaction = modelMapper.map(transactionRequest,
-    // Transaction.class);
-    // transaction.setCourse(courseService.getById(transactionRequest.getCourseId()));
-    // transaction.setMember(memberService.getById(transactionRequest.getMemberId()));
-
     Transaction transaction = new Transaction();
     Course course = courseService.getById(transactionRequest.getCourseId());
     Member member = memberService.getById(transactionRequest.getMemberId());
